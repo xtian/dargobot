@@ -1,7 +1,7 @@
 import Character from '../models/character'
 
-export default function(text) {
-  const [name, realm, region] = text.split(' ')
+const handler = (text) => {
+  const [_, name, realm, region] = text.split(' ')
 
   return Character.fetch(name, realm, region).then(char => {
     const message =
@@ -11,3 +11,7 @@ export default function(text) {
     return message
   })
 }
+
+handler.match = /!?ilvl \S+/
+
+export default handler

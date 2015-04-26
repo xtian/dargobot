@@ -3,17 +3,15 @@ import Promise from 'bluebird'
 import handlers from './handlers'
 
 export default function(text) {
-  const [firstWord, ...rest] = text.split(' ')
-  const message = rest.join(' ')
+  for (let key in handlers) {
+    let handler = handlers[key]
 
-  switch(firstWord.toLowerCase()) {
-    case 'gearscore':
-      return handlers.gearscore(message)
-    case 'ilvl':
-      return handlers.ilvl(message)
-    default:
-      return new Promise((_, reject) => {
-        reject('Message did not match a handler.')
-      })
+    if (handler.match.test(text)) {
+      return handler(text)
+    }
   }
+
+  return new Promise((_, reject) => {
+    reject('Message did not match a handler.')
+  })
 }
