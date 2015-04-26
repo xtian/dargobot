@@ -1,0 +1,23 @@
+{
+  "name": "dargobot",
+  "version": "0.1.0",
+  "description": "Slack Bot",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "test": "lab -I regeneratorRuntime,core,Reflect,_babelPolyfill"
+  },
+  "repository": "xtian/dargobot",
+  "author": "Christian Wesselhoeft <hi@xtian.us>",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^1.1.0",
+    "node-babel": "^0.1.2",
+    "slack-client": "^1.4.0"
+  },
+  "devDependencies": {
+    "code": "^1.4.0",
+    "lab": "^5.7.0"
+  }
+}
