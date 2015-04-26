@@ -1,6 +1,6 @@
-const Slack = require('slack-client')
+import Slack from 'slack-client'
 
-const handleMessage = require('./bot')
+import handleMessage from './bot'
 
 const token = process.env.SLACK_TOKEN
 const autoReconnect = true
