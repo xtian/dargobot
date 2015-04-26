@@ -3,11 +3,11 @@ import Promise from 'bluebird'
 import Character from './models/character'
 
 export default function(text) {
-  const firstWord = text.split(' ')[0].toLowerCase()
+  const [firstWord, ...rest] = text.split(' ')
 
-  switch(firstWord) {
+  switch(firstWord.toLowerCase()) {
     case 'ilvl':
-      return ilvl(text)
+      return ilvl(rest.join(' '))
     default:
       return new Promise((_, reject) => {
         reject('Message did not match a handler.')
@@ -16,10 +16,7 @@ export default function(text) {
 }
 
 function ilvl(text) {
-  const [_, name, realm = defaultRealm, region = defaultRegion] = text.split(' ')
-
-  const url = `https://${region}.api.battle.net/wow/character` +
-    `/${realm}/${name}?apikey=${bnetApiKey}&fields=items`
+  const [name, realm, region] = text.split(' ')
 
   return Character.fetch(name, realm, region).then(character => {
     return character.averageItemLevel.toString()
