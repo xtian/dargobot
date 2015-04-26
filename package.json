@@ -12,6 +12,7 @@
   "author": "Christian Wesselhoeft <hi@xtian.us>",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^2.9.24",
     "dotenv": "^1.1.0",
     "node-babel": "^0.1.2",
     "slack-client": "^1.4.0"
