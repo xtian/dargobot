@@ -1,11 +1,6 @@
-import request from 'request'
 import Promise from 'bluebird'
 
-const get = Promise.promisify(request.get)
-
-const bnetApiKey = process.env.BNET_API_KEY
-const defaultRegion = process.env.DEFAULT_REGION
-const defaultRealm = process.env.DEFAULT_REALM
+import Character from './models/character'
 
 export default function(text) {
   const firstWord = text.split(' ')[0].toLowerCase()
@@ -14,7 +9,9 @@ export default function(text) {
     case 'ilvl':
       return ilvl(text)
     default:
-      return new Promise((_, reject) => reject('Message did not match a handler.'))
+      return new Promise((_, reject) => {
+        reject('Message did not match a handler.')
+      })
   }
 }
 
@@ -24,7 +21,7 @@ function ilvl(text) {
   const url = `https://${region}.api.battle.net/wow/character` +
     `/${realm}/${name}?apikey=${bnetApiKey}&fields=items`
 
-  return get({ url, json: true }).spread((_, body) => {
-    return body.items.averageItemLevel.toString()
+  return Character.fetch(name, realm, region).then(character => {
+    return character.averageItemLevel.toString()
   })
 }

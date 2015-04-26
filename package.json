@@ -15,6 +15,7 @@
     "bluebird": "^2.9.24",
     "dotenv": "^1.1.0",
     "node-babel": "^0.1.2",
+    "request": "^2.55.0",
     "slack-client": "^1.4.0"
   },
   "devDependencies": {
