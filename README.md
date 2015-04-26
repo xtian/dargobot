@@ -1,0 +1,2 @@
+# Dargobot
+Personal Slack companion
