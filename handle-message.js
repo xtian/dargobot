@@ -1,6 +1,6 @@
 import Promise from 'bluebird'
 
-import Character from './models/character'
+import handlers from './handlers'
 
 export default function(text) {
   const [firstWord, ...rest] = text.split(' ')
@@ -8,36 +8,12 @@ export default function(text) {
 
   switch(firstWord.toLowerCase()) {
     case 'gearscore':
-      return gearscore(message)
+      return handlers.gearscore(message)
     case 'ilvl':
-      return ilvl(message)
+      return handlers.ilvl(message)
     default:
       return new Promise((_, reject) => {
         reject('Message did not match a handler.')
       })
   }
-}
-
-function gearscore(text) {
-  const [name, realm, region] = text.split(' ')
-
-  return Character.fetch(name, realm, region).then(char => {
-    const message =
-      `_Gearscore for ${char.name} of ${char.region}-${char.realm}:_` +
-      `\n*${char.gearscore.toString()}*`
-
-    return message
-  })
-}
-
-function ilvl(text) {
-  const [name, realm, region] = text.split(' ')
-
-  return Character.fetch(name, realm, region).then(char => {
-    const message =
-      `_Average iLvl for ${char.name} of ${char.region}-${char.realm}:_` +
-      `\n*${char.averageItemLevel.toString()}*`
-
-    return message
-  })
 }

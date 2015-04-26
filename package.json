@@ -17,6 +17,7 @@
     "gearscore": "git://github.com/xtian/gearscore.js.git",
     "node-babel": "^0.1.2",
     "request": "^2.55.0",
+    "require-directory": "^2.1.0",
     "slack-client": "^1.4.0"
   },
   "devDependencies": {
