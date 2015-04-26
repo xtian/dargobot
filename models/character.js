@@ -1,3 +1,4 @@
+import gearscore from 'gearscore'
 import Promise from 'bluebird'
 import request from 'request'
 
@@ -22,5 +23,9 @@ export default class Character {
   get averageItemLevel() {
     const items = this._data.items
     return items && items.averageItemLevel
+  }
+
+  get gearscore() {
+    return gearscore(Object.create(this._data))
   }
 }
