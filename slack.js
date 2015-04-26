@@ -1,6 +1,6 @@
 import Slack from 'slack-client'
 
-import handleMessage from './bot'
+import handleMessage from './handle-message'
 
 const token = process.env.SLACK_TOKEN
 const autoReconnect = true
