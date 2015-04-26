@@ -32,6 +32,6 @@ export default class Character {
   }
 
   get gearscore() {
-    return gearscore(this._data)
+    return this._data.items && gearscore(this._data)
   }
 }
