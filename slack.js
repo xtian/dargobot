@@ -14,13 +14,15 @@ slack.on('message', message => {
 
   console.log(`${type} ${ts}: #${channel.name} @${user.name} ${text}`)
 
-  const mentionRegExp = new RegExp(`^<@${slack.self.id}>:?`)
-  const isMention = mentionRegExp.test(text)
-  const isDM = channel.name === user.name
+  const mentionPattern = new RegExp(`^<@${slack.self.id}>:?`)
 
-  if (isDM || isMention) {
-    const messageText = text.replace(mentionRegExp, '').trim()
-    const response = handleMessage(messageText)
+  const isCommand = /^!\w/.test(text)
+  const isDM = channel.name === user.name
+  const isMention = mentionPattern.test(text)
+
+  if (isCommand || isDM || isMention) {
+    const parsedText = text.replace(mentionPattern, '').trim()
+    const response = handleMessage(parsedText)
 
     response.then(text => channel.send(text))
     response.catch(err => console.error(err))
