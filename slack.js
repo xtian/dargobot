@@ -14,8 +14,13 @@ slack.on('message', message => {
 
   console.log(`${type} ${ts}: #${channel.name} @${user.name} ${text}`)
 
-  if (text.trim() && channel.is_channel) {
-    const response = handleMessage(parsedMessage)
+  const mentionRegExp = new RegExp(`^<@${slack.self.id}>:?`)
+  const isMention = mentionRegExp.test(text)
+  const isDM = channel.name === user.name
+
+  if (isDM || isMention) {
+    const messageText = text.replace(mentionRegExp, '').trim()
+    const response = handleMessage(messageText)
 
     response.then(text => channel.send(text))
     response.catch(err => console.error(err))
@@ -27,12 +32,11 @@ slack.on('error', err => console.error(err))
 function parseMessage({ type, ts, channel, user, text }) {
   return { type, ts, text
 
-  , user: slack.getUserByID(user) || { name: 'UNKNOWN_USER' }
+  , user: slack.getUserByID(user) ||
+    { name: 'UNKNOWN_USER' }
 
   , channel: slack.getChannelGroupOrDMByID(channel) ||
-    { name: 'UNKNOWN_CHANNEL'
-    , is_channel: false
-    }
+    { name: 'UNKNOWN_CHANNEL' }
   }
 }
 
