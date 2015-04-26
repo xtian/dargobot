@@ -12,6 +12,6 @@ const handler = (text) => {
   })
 }
 
-handler.match = /^!?gearscore \S+/
+handler.pattern = /^!?gearscore \S+/
 
 export default handler

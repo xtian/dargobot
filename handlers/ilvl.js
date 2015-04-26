@@ -12,6 +12,6 @@ const handler = (text) => {
   })
 }
 
-handler.match = /!?ilvl \S+/
+handler.pattern = /!?ilvl \S+/
 
 export default handler

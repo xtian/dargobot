@@ -6,7 +6,7 @@ export default function(text) {
   for (let key in handlers) {
     let handler = handlers[key]
 
-    if (handler.match.test(text)) {
+    if (handler.pattern.test(text)) {
       return handler(text)
     }
   }
