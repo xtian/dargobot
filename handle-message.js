@@ -4,7 +4,7 @@ import handlers from './handlers'
 
 export default function(text) {
   for (let key in handlers) {
-    let handler = handlers[key]
+    const handler = handlers[key]
 
     if (handler.pattern.test(text)) {
       return handler(text)
