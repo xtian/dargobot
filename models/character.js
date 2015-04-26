@@ -11,13 +11,19 @@ const defaultRealm = process.env.DEFAULT_REALM
 export default class Character {
   constructor(data = {}) {
     this._data = data
+
+    const { name, realm, region } = data
+    Object.assign(this, { name, realm, region })
   }
 
   static fetch(name, realm = defaultRealm, region = defaultRegion) {
     const url = `https://${region}.api.battle.net/wow/character` +
       `/${realm}/${name}?apikey=${bnetApiKey}&fields=items`
 
-    return get({ url, json: true }).spread((_, body) => new Character(body))
+    return get({ url, json: true }).spread((_, body) => {
+      body.region = region.toUpperCase()
+      return new Character(body)
+    })
   }
 
   get averageItemLevel() {

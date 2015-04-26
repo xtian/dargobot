@@ -21,15 +21,23 @@ export default function(text) {
 function gearscore(text) {
   const [name, realm, region] = text.split(' ')
 
-  return Character.fetch(name, realm, region).then(character => {
-    return character.gearscore.toString()
+  return Character.fetch(name, realm, region).then(char => {
+    const message =
+      `_Gearscore for ${char.name} of ${char.region}-${char.realm}:_` +
+      `\n*${char.gearscore.toString()}*`
+
+    return message
   })
 }
 
 function ilvl(text) {
   const [name, realm, region] = text.split(' ')
 
-  return Character.fetch(name, realm, region).then(character => {
-    return character.averageItemLevel.toString()
+  return Character.fetch(name, realm, region).then(char => {
+    const message =
+      `_Average iLvl for ${char.name} of ${char.region}-${char.realm}:_` +
+      `\n*${char.averageItemLevel.toString()}*`
+
+    return message
   })
 }
