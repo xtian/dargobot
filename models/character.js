@@ -26,6 +26,6 @@ export default class Character {
   }
 
   get gearscore() {
-    return gearscore(Object.create(this._data))
+    return gearscore(this._data)
   }
 }
