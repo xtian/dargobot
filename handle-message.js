@@ -11,7 +11,5 @@ export default function(text) {
     }
   }
 
-  return new Promise((_, reject) => {
-    reject('Message did not match a handler.')
-  })
+  return Promise.reject('Message did not match a handler.')
 }
