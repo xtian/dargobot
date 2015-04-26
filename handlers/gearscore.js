@@ -17,4 +17,6 @@ const handler = (text) => {
 
 handler.pattern = /^!?gearscore \S+/
 
+handler.helpMessage = `!gearscore [name] [realm] [region]`
+
 export default handler

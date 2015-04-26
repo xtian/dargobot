@@ -17,4 +17,6 @@ const handler = (text) => {
 
 handler.pattern = /!?ilvl \S+/
 
+handler.helpMessage = `!ilvl [name] [realm] [region]`
+
 export default handler
