@@ -11,12 +11,10 @@ const handler = () => {
     .sort()
     .map(message => '`' + message + '`')
 
-  return new Promise(resolve => {
-    resolve(dedent`
-      _Commands:_
-      ${messages.join('\n')}
-      `)
-  })
+  return Promise.resolve(dedent`
+    _Commands:_
+    ${messages.join('\n')}
+  `)
 }
 
 handler.pattern = /^help\b/
