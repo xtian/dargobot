@@ -22,7 +22,7 @@ slack.on('message', message => {
 
   if (isCommand || isDM || isMention) {
     const parsedText = text.replace(mentionPattern, '').trim()
-    const response = handleMessage(parsedText)
+    const response = handleMessage(parsedText, user)
 
     response.then(text => channel.send(text))
     response.catch(err => console.error(err))
