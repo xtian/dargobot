@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "bluebird": "^2.9.24",
+    "cowsay": "^1.1.1",
     "dedent": "^0.4.0",
     "dotenv": "^1.1.0",
     "gearscore": "git://github.com/xtian/gearscore.js.git",
