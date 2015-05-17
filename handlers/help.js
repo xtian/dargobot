@@ -17,6 +17,6 @@ const handler = () => {
   `)
 }
 
-handler.pattern = /^help\b/
+handler.pattern = /!?help\b/
 
 export default handler
