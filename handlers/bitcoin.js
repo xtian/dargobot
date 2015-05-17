@@ -5,14 +5,15 @@ import request from 'request'
 const get = Promise.promisify(request.get)
 
 const handler = () => {
-  const buy = get({ url: 'https://api.coinbase.com/v1/prices/buy', json: true })
-  const sell = get({ url: 'https://api.coinbase.com/v1/prices/sell', json: true })
+  const buy = get({
+    url: 'https://api.coinbase.com/v1/prices/spot_rate'
+  , json: true
+  })
 
-  return Promise.all([buy, sell]).spread(([_br, buy], [_sr, sell]) => {
+  return buy.spread((_, buy) => {
     return dedent`
-      _Current Bitcoin Prices:_
-      *Buy:* $${buy.amount}
-      *Sell:* $${sell.amount}
+      _Current Bitcoin Price:_
+      *$${buy.amount}*
       `
   })
 }
