@@ -3,7 +3,7 @@ import Promise from 'bluebird'
 
 const { abs, floor, random } = Math
 
-const handler = (text) => {
+const handler = (text, user) => {
   const [_, x = 100, y] = text.split(' ')
 
   const min = y ? parseInt(x) : 1
@@ -12,7 +12,7 @@ const handler = (text) => {
   const roll = floor(random() * (max - min + 1)) + min
 
   return Promise.resolve(dedent`
-    _Roll ${min}-${max}_:
+    _${user.name} rolls (${min}-${max})_:
     *${roll}*
     `)
 }
