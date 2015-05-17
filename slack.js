@@ -1,4 +1,5 @@
 import Slack from 'slack-client'
+import Message from 'slack-client/src/message'
 
 import handleMessage from './handle-message'
 
@@ -24,7 +25,15 @@ slack.on('message', message => {
     const parsedText = text.replace(mentionPattern, '').trim()
     const response = handleMessage(parsedText, user)
 
-    response.then(text => channel.send(text))
+    response.then(res => {
+      const options = typeof res === 'string'
+        ? { text: res }
+        : res
+
+      const message = new Message(slack, options)
+      channel.sendMessage(message)
+    })
+
     response.catch(err => console.error(err))
   }
 })
