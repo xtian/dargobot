@@ -18,7 +18,6 @@
     "dotenv": "^1.1.0",
     "gearscore": "xtian/gearscore.js",
     "lodash.groupby": "^3.1.0",
-    "lodash.map": "^3.1.2",
     "lodash.sortby": "^3.1.2",
     "lodash.zip": "^3.1.0",
     "node-babel": "^0.1.2",

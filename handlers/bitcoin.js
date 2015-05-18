@@ -1,6 +1,5 @@
 import dedent from 'dedent'
 import groupBy from 'lodash.groupby'
-import map from 'lodash.map'
 import sortBy from 'lodash.sortby'
 import Promise from 'bluebird'
 import request from 'request'
@@ -41,7 +40,7 @@ function averagesByDay(rows) {
 
   const sorted = sortBy(byDay, (_, dateString) => new Date(dateString))
 
-  return map(sorted, array => {
+  return sorted.map(array => {
     const average = array
       .map(row => parseFloat(row[1]))
       .reduce((sum, i) => sum + i) / array.length
