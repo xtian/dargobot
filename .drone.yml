@@ -1,0 +1,14 @@
+build:
+  image: elixir:1.3
+  environment:
+    - MIX_ENV=test
+
+  commands:
+    - mix deps.get
+    - mix test
+
+cache:
+  mount:
+    - .git
+    - _build
+    - deps
