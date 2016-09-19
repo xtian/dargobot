@@ -1,0 +1,2 @@
+defmodule Dargobot do
+end
