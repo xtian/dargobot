@@ -4,7 +4,9 @@ build:
     - MIX_ENV=test
 
   commands:
+    - mix local.hex --force
     - mix deps.get
+    - mix credo --strict
     - mix test
 
 cache:
