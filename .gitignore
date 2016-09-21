@@ -17,3 +17,4 @@ erl_crash.dump
 *.ez
 
 .drone.sec.yml
+dev.secret.exs
