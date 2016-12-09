@@ -18,5 +18,6 @@ mix run --no-halt
 
 ```
 mix credo --strict
+mix dialyzer
 mix test
 ```
