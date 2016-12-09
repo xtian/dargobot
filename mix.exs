@@ -42,8 +42,7 @@ defmodule Dargobot.Mixfile do
   defp deps do
     [
       {:credo, "~> 0.4", only: [:dev, :test]},
-      {:slack, github: "blakewilliams/elixir-slack"},
-      {:websocket_client, github: "jeremyong/websocket_client"}
+      {:slack, "~> 0.9.0"}
     ]
   end
 end
