@@ -12,7 +12,8 @@ defmodule Dargobot.Mixfile do
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      dialyzer: [flags: ~w(-Wunmatched_returns -Werror_handling -Wrace_conditions -Wunderspecs)]
    ]
   end
 
@@ -42,6 +43,7 @@ defmodule Dargobot.Mixfile do
   defp deps do
     [
       {:credo, "~> 0.4", only: [:dev, :test]},
+      {:dialyxir, "~> 0.4", only: [:dev, :test]},
       {:slack, "~> 0.9.0"}
     ]
   end
