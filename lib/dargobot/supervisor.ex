@@ -10,18 +10,18 @@ defmodule Dargobot.Supervisor do
   end
 
   def init(:ok) do
-    :dargobot
-    |> Application.get_env(:tokens)
-    |> Enum.map(&build_worker/1)
-    |> supervise(strategy: :one_for_one)
+    clients =
+      :dargobot
+      |> Application.get_env(:tokens)
+      |> Enum.map(&build_client/1)
+
+    supervise(clients, strategy: :one_for_one)
   end
 
-  defp build_worker(token) do
-    id = token |> hash() |> Base.encode16()
-    worker(Dargobot.Client, [token], id: id)
+  defp build_client(token) do
+    id = token |> hash |> Base.encode16
+    worker(Slack.Bot, [Dargobot.SlackHandler, [], token], id: id)
   end
 
-  defp hash(value) do
-    :crypto.hash(:sha256, value)
-  end
+  defp hash(value), do: :crypto.hash(:sha256, value)
 end
