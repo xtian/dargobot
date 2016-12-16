@@ -1,6 +1,6 @@
 defmodule Dargobot.Supervisor do
   @moduledoc """
-  Starts up a client for each configured token
+  Starts up a router and one client for each configured token
   """
 
   use Supervisor
@@ -10,12 +10,13 @@ defmodule Dargobot.Supervisor do
   end
 
   def init(:ok) do
+    router = worker(Dargobot.Router, [])
     clients =
       :dargobot
       |> Application.get_env(:tokens)
       |> Enum.map(&build_client/1)
 
-    supervise(clients, strategy: :one_for_one)
+    supervise([router | clients], strategy: :one_for_one)
   end
 
   defp build_client(token) do
