@@ -7,7 +7,6 @@ build:
     - mix local.hex --force
     - mix deps.get
     - mix credo --strict
-    - mix dialyzer
     - mix test
 
 cache:
