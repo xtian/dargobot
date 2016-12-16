@@ -1,0 +1,9 @@
+{
+  "name": "Dargobot",
+  "repository": "https://github.com/xtian/dargobot",
+  "env": {
+    "DOKKU_DISABLE_PROXY": "true",
+    "MIX_ENV": "production",
+    "NO_VHOST": "true"
+  }
+}
