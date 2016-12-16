@@ -14,8 +14,7 @@ defmodule Commands.Roll do
 
   defp random_integer([argument | _]) do
     with {argument, _} <- Integer.parse(argument) do
-      max = argument |> max(1) |> min(100)
-      Enum.random(1..max)
+      Enum.random(1..max(argument, 1))
     else
       :error -> random_integer([])
     end
