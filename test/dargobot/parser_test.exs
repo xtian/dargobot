@@ -12,5 +12,10 @@ defmodule Dargobot.ParserTest do
       assert Parser.parse_command("!foo bar") == {:foo, ["bar"]}
       assert Parser.parse_command("!foo bar baz") == {:foo, ["bar", "baz"]}
     end
+
+    test "returns nil for non-commands" do
+      assert Parser.parse_command("") == nil
+      assert Parser.parse_command("foo") == nil
+    end
   end
 end
