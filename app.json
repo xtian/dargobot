@@ -3,6 +3,7 @@
   "repository": "https://github.com/xtian/dargobot",
   "env": {
     "DOKKU_DISABLE_PROXY": "true",
+    "DOKKU_WAIT_TO_RETIRE": 0,
     "MIX_ENV": "prod",
     "NO_VHOST": "true"
   }
