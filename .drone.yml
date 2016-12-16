@@ -14,3 +14,11 @@ cache:
     - .git
     - _build
     - deps
+
+deploy:
+  git_push:
+    branch: master
+    remote: dokku@xtian.us:dargobot
+    force: false
+    when:
+      branch: master
