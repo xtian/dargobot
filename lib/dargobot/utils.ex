@@ -8,19 +8,17 @@ defmodule Dargobot.Utils do
   Assumes conventional naming pattern, e.g.: `Foo.Bar` defined
   in `lib/foo/bar.ex`.
   """
-  @spec get_modules(String.t) :: [module]
-  def get_modules(path), do: get_modules(path, root: "lib")
-
-  @spec get_modules(String.t, root: String.t) :: [module]
-  def get_modules(path, root: root) do
+  @spec get_modules(String.t, keyword) :: [module]
+  def get_modules(path, options \\ []) do
+    root = Keyword.get(options, :root, "lib")
     {:ok, files} = [root, path] |> Path.join |> File.ls
 
     Enum.map files, fn filename ->
-      basename = Path.basename(filename, Path.extname(filename))
-
-      [path, basename]
+      [path, remove_extension(filename)]
       |> Enum.map(&Macro.camelize/1)
       |> Module.safe_concat
     end
   end
+
+  defp remove_extension(filename), do: Path.basename(filename, Path.extname(filename))
 end
