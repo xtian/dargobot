@@ -7,11 +7,13 @@ defmodule Commands.Roll do
 
   use GenEvent
 
+  @default 100
+
   @spec handle_event({:roll, [String.t], Slack.reply_info}, any) :: {:ok, any}
   def handle_event({:roll, arguments, reply_info}, state) do
     arguments
     |> List.first
-    |> parse_integer(100)
+    |> parse_integer
     |> random_integer
     |> to_string
     |> Slack.reply(reply_info)
@@ -19,13 +21,15 @@ defmodule Commands.Roll do
     {:ok, state}
   end
 
-  defp parse_integer(nil, default), do: default
-  defp parse_integer(string, default) do
+  @spec parse_integer(nil | String.t) :: integer
+  defp parse_integer(nil), do: @default
+  defp parse_integer(string) do
     case Integer.parse(string) do
       {integer, _} -> integer
-      :error -> default
+      :error -> @default
     end
   end
 
+  @spec random_integer(integer) :: integer
   defp random_integer(input), do: Enum.random(1..max(input, 1))
 end

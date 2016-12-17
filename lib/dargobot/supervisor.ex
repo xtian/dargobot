@@ -24,5 +24,6 @@ defmodule Dargobot.Supervisor do
     worker(Slack.Bot, [Dargobot.Slack, [], token], id: id)
   end
 
+  @spec hash(String.t) :: String.t
   defp hash(value), do: :crypto.hash(:sha256, value)
 end

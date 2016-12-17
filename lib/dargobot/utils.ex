@@ -20,5 +20,6 @@ defmodule Dargobot.Utils do
     end
   end
 
+  @spec remove_extension(String.t) :: String.t
   defp remove_extension(filename), do: Path.basename(filename, Path.extname(filename))
 end

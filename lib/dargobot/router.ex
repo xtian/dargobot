@@ -20,6 +20,7 @@ defmodule Dargobot.Router do
     end
   end
 
+  @spec add_commands(pid) :: :ok
   defp add_commands(pid) do
     "commands"
     |> Utils.get_modules
