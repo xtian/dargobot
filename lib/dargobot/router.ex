@@ -11,10 +11,10 @@ defmodule Dargobot.Router do
     {add_commands(pid), pid}
   end
 
-  @spec dispatch(String.t, String.t, pid) :: :ok
-  def dispatch(message, channel, reply_pid) do
+  @spec dispatch(String.t, Dargobot.Slack.reply_info) :: :ok
+  def dispatch(message, reply_info) do
     with {command, arguments} <- Parser.parse_command(message) do
-      GenEvent.notify(:router, {command, arguments, channel, reply_pid})
+      GenEvent.notify(:router, {command, arguments, reply_info})
     else
       nil -> :ok
     end

@@ -3,10 +3,14 @@ defmodule Dargobot.Slack do
   Handles incoming messages and sends responses
   """
 
+  @type reply_info :: {pid, String.t}
+
+  alias Dargobot.Router
+
   use Slack
 
   def handle_event(message = %{type: "message"}, _, state) do
-    :ok = Dargobot.Router.dispatch(message.text, message.channel, self())
+    :ok = Router.dispatch(message.text, {self(), message.channel})
     {:ok, state}
   end
   def handle_event(_, _, state), do: {:ok, state}
@@ -16,4 +20,9 @@ defmodule Dargobot.Slack do
     {:ok, state}
   end
   def handle_info(_, _, state), do: {:ok, state}
+
+  @spec reply(String.t, reply_info) :: any
+  def reply(message, {pid, channel}) do
+    send(pid, {:message, message, channel})
+  end
 end
