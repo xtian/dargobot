@@ -21,7 +21,7 @@ defmodule Dargobot.Supervisor do
 
   defp build_client(token) do
     id = token |> hash |> Base.encode16
-    worker(Slack.Bot, [Dargobot.SlackHandler, [], token], id: id)
+    worker(Slack.Bot, [Dargobot.Slack, [], token], id: id)
   end
 
   defp hash(value), do: :crypto.hash(:sha256, value)

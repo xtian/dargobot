@@ -1,4 +1,4 @@
-defmodule Dargobot.SlackHandler do
+defmodule Dargobot.Slack do
   @moduledoc """
   Handles incoming messages and sends responses
   """
